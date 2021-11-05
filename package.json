@@ -1,0 +1,45 @@
+{
+  "name": "trial-ts-node",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node-dev --respawn src/index.ts",
+    "tsc": "tsc",
+    "build": "yarn run -s clean && yarn run -s tsc",
+    "clean": "rimraf dist/*",
+    "fix": "yarn run -s type-check && yarn run -s format && yarn run -s lint:es:fix",
+    "type-check": "tsc --pretty --noEmit",
+    "format": "prettier --write --loglevel=warn 'src/**/*.{js,jsx,ts,tsx,html,gql,graphql,json}'",
+    "lint:es": "eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:es:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:conflict": "eslint-config-prettier 'src/**/*.{js,jsx,ts,tsx}'",
+    "preinstall": "typesync || :"
+  },
+  "devDependencies": {
+    "@types/eslint": "^7.28.2",
+    "@types/node": "^16.11.6",
+    "@types/prettier": "^2.4.1",
+    "@types/rimraf": "^3.0.2",
+    "@typescript-eslint/eslint-plugin": "^5.3.0",
+    "@typescript-eslint/parser": "^5.3.0",
+    "eslint": "^8.1.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.25.2",
+    "lint-staged": "^11.2.6",
+    "prettier": "^2.4.1",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.4.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.4.4",
+    "typesync": "^0.8.0"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "tsc --noEmit",
+      "prettier --write --loglevel=error",
+      "eslint --fix --quiet"
+    ]
+  }
+}
